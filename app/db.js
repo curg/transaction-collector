@@ -21,9 +21,9 @@ const saveTransactions = (transactions) => {
                 logger.error(err);
                 logger.error("We failed to save transactions.");
             }
+
+            client.close();
         })
-      
-        client.close();
     });
 }
 
