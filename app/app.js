@@ -9,6 +9,8 @@ const db = require('./db');
 const rule = '*/15 * * * * *';
 const mainnet = "https://mainnet.infura.io/v3/" + config.INFURA_API_TOKEN;
 
+db.connect();
+
 const now = () => {
     return moment().format('YYYY-MM-DD HH:mm')
 }
