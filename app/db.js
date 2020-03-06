@@ -16,6 +16,7 @@ const saveTransactions = (transactions) => {
         const collection = db.collection(config.database.collection);
         collection.insertMany(transactions, (err, result) => {
             if(err != null) {
+                logger.error(err);
                 logger.error("We failed to save transactions.");
             }
         })

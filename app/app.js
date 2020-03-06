@@ -24,7 +24,9 @@ const readBlockJob = () => {
                 .then((block) => {
                     if(block != null) {
                         logger.info('read [' + lastblock + '] block | found [' + block.transactions.length + '] transactions | at [' + now() + ']');
-                        db.saveTransactions(block.transactions);
+                        if(block.transactions.length > 0)
+                            db.saveTransactions(block.transactions);
+                        
                         metadata.set_last_read_block(lastblock+1);
                     }
                 })
