@@ -2,8 +2,9 @@
   "name": "transaction-collector",
   "version": "1.0.0",
   "description": "This implements a engine collecting all ethereum transactions.",
-  "main": "app.js",
+  "main": "./app/app.js",
   "scripts": {
+    "start": "node ./app/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/curg/transaction-collector/issues"
   },
-  "homepage": "https://github.com/curg/transaction-collector#readme"
+  "homepage": "https://github.com/curg/transaction-collector#readme",
+  "dependencies": {
+    "lowdb": "^1.0.0",
+    "mongoose": "^5.9.3",
+    "web3": "^1.2.6"
+  }
 }

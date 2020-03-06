@@ -1,0 +1,11 @@
+{
+    "target": "mongodb",
+    "database": {
+        "host": "127.0.0.1",
+        "port": 27017
+    },
+    "metadata": {
+        "file": ".meta/db.json"
+    },
+    "INFURA_API_TOKEN": "84562ddf78e34d05bc3b13b064e5679b"
+}
