@@ -4,7 +4,9 @@ const logger = require('./logger');
 
 let host = "mongodb://" + config.database.host + ":" + config.database.port
 let db_name = config.database.name;
-let client = new MongoClient(host);
+let client = new MongoClient(host, {
+    useUnifiedTopology: true
+});
 
 const saveTransactions = (transactions) => {
     client.connect(function(err) {
