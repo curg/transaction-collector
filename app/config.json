@@ -9,5 +9,6 @@
     "metadata": {
         "file": ".meta/db.json"
     },
+    "DIRECTION": "forward",
     "INFURA_API_TOKEN": "84562ddf78e34d05bc3b13b064e5679b"
 }

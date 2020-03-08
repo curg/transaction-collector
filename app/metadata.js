@@ -14,7 +14,7 @@ const set_last_read_block = (lastblock) => {
 const get_last_read_block = () => {
     var lastblock = db.get('lastblock').value();
     if(typeof lastblock == 'undefined') {
-        return 1;
+        return null;
     } else {
         return lastblock;
     }
