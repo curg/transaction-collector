@@ -48,10 +48,12 @@ const readBlockJob = () => {
 }
 
 const run = () => {
+    logger.info("Collector has been started.");
     schedule.scheduleJob(rule, readBlockJob);
 }
 
 const init = () => {
+    let web3 = new Web3(new Web3.providers.HttpProvider(mainnet));
     let lastblock = metadata.get_last_read_block();
     if(lastblock == null) {
         if(config.DIRECTION == types.TYPE_DIRECTION_FORWARD) {
@@ -61,10 +63,13 @@ const init = () => {
         } else {
             web3.eth.getBlockNumber()
                 .then(blockNumber => {
+                    console.log(blockNumber);
                     metadata.set_last_read_block(blockNumber);
                     run();
                 });
         }
+    } else {
+        run();
     }
 }
 
