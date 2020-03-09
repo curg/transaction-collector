@@ -25,27 +25,18 @@ const readBlockJob = () => {
     web3.eth.net.isListening(async (error, listening) => {
         if(listening) {
             try {
-                if(lastblock == null) {
-                    if(config.DIRECTION == types.TYPE_DIRECTION_FORWARD) {
-                        lastblock = 1;
-                    } else {
-                        lastblock = await web3.eth.getBlockNumber();
-                    }
-                }
-
                 if(config.DIRECTION == types.TYPE_DIRECTION_FORWARD) {
                     nextblock = lastblock + 1;
                 } else {
                     nextblock = lastblock - 1;
                 }
+                metadata.set_last_read_block(nextblock);
 
                 let block = await web3.eth.getBlock(lastblock, returnTransactionAsObject);
                 if(block != null) {
                     logger.info('read [' + lastblock + '] block | found [' + block.transactions.length + '] transactions | at [' + now() + ']');
                     if(block.transactions.length > 0)
                         db.saveTransactions(block.transactions);
-                    
-                    metadata.set_last_read_block(nextblock);
                 }
             } catch(err) {
                 logger.error(err);
@@ -56,4 +47,25 @@ const readBlockJob = () => {
     })
 }
 
-schedule.scheduleJob(rule, readBlockJob);
+const run = () => {
+    schedule.scheduleJob(rule, readBlockJob);
+}
+
+const init = () => {
+    let lastblock = metadata.get_last_read_block();
+    if(lastblock == null) {
+        if(config.DIRECTION == types.TYPE_DIRECTION_FORWARD) {
+            lastblock = 1;
+            metadata.set_last_read_block(lastblock);
+            run();
+        } else {
+            web3.eth.getBlockNumber()
+                .then(blockNumber => {
+                    metadata.set_last_read_block(blockNumber);
+                    run();
+                });
+        }
+    }
+}
+
+init();
