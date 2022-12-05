@@ -19,7 +19,7 @@
   "homepage": "https://github.com/curg/transaction-collector#readme",
   "dependencies": {
     "lowdb": "^1.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "mongodb": "^3.5.4",
     "node-schedule": "^1.3.2",
     "web3": "^1.2.6",
